@@ -1,10 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mills Calc</title>
-    <script type="text/babel" src="/path/to/mills-act-calculator.jsx"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mills Calculator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.1.9/Recharts.min.js"></script>
 </head>
 <body>
     <div id="root"></div>
+    <script type="text/babel">
+        const { Component } = React;
+        const { render } = ReactDOM;
+        const { LineChart, Line, XAxis, YAxis, Tooltip, Legend } = Recharts;
+
+        class MillsActCalculator extends Component {
+            render() {
+                return (
+                    <LineChart width={600} height={400} data={this.props.data}>
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Line type="monotone" dataKey="value" stroke="#8884d8" />
+                    </LineChart>
+                );
+            }
+        }
+
+        const data = [
+            { name: 'Page A', value: 400 },
+            { name: 'Page B', value: 300 },
+            { name: 'Page C', value: 200 },
+            { name: 'Page D', value: 278 },
+            { name: 'Page E', value: 189 },
+        ];
+
+        render(<MillsActCalculator data={data} />, document.getElementById('root'));
+    </script>
 </body>
 </html>
